@@ -51,7 +51,7 @@ public class WeekPlansApp{
 					return;
 			}
 		}
-		}
+	}
 		public static void showSelect(Day[] week){
 			System.out.print("0.全予定表示: 1.授業のみ表示: 2.休みのみ表示: 3.未定のみ表示: 4.戻る >");
 			int showSelectNum=new Scanner(System.in).nextInt();
@@ -61,33 +61,33 @@ public class WeekPlansApp{
 				Day.selectPrint(week,showSelectNum);
 			}
 		}
-		public static void changePlan(Day[] week){
+		public static Day[] changePlan(Day[] week){
 			Scanner sc=new Scanner(System.in);
 			Day[] tempArr=new Day[week.length];
+			Day.selectPrint(week,0);
 			for(int i=0;i<tempArr.length;i++){
 				Day temp=week[i];
 				tempArr[i]=temp;
-				System.out.print((i+1)+".");
-				Day.selectPrint(tempArr,0);
 			}
 			while(true){
-				System.out.print("変更する番号を選択 (0で変更終了)>");
-				int changeNum=sc.nextInt();
-				if(changeNum==0){
-					return;
+				System.out.print("変更する曜日を選択 (0で変更終了)>");
+				String change=sc.nextLine();
+				if(change.equals("0")){
+					return week;
 				}
-					for(int i=0;i<week.length;i++){
-							week[i]=tempArr[i];
-					}
-					System.out.print(" "+tempArr[changeNum-1].day+"の予定は?  1.授業: 2.休み >");
+					System.out.print(" "+change+"の予定は?  1.授業: 2.休み >");
 
 					int cPlan=sc.nextInt();
 					System.out.print(" メモを入力→ ");sc.nextLine();
 					String Cmemo=sc.nextLine();
-					tempArr[changeNum-1].plan=cPlan;
-					tempArr[changeNum-1].memo=Cmemo;
+					for(int i=0;i<week.length;i++){
+						if(week[i].day.equals(change)){
+						week[i].plan=cPlan;
+						week[i].memo=Cmemo;
+						}
+					}
 			}
-	}
+		}
 }
 
 //
