@@ -52,13 +52,14 @@ public class WeekPlansApp{
 			}
 		}
 	}
-		public static void showSelect(Day[] week){
+		public static Day[] showSelect(Day[] week){
 			System.out.print("0.全予定表示: 1.授業のみ表示: 2.休みのみ表示: 3.未定のみ表示: 4.戻る >");
 			int showSelectNum=new Scanner(System.in).nextInt();
 			if(showSelectNum==4){
-				return;
+				return week;
 			}else{
 				Day.selectPrint(week,showSelectNum);
+				return week;
 			}
 		}
 		public static Day[] changePlan(Day[] week){
@@ -70,12 +71,13 @@ public class WeekPlansApp{
 				tempArr[i]=temp;
 			}
 			while(true){
-				System.out.print("変更する曜日を選択 (0で変更終了)>");
+				System.out.print("変更する曜日を入力 (0で変更終了)>");
 				String change=sc.nextLine();
 				if(change.equals("0")){
 					return week;
 				}
 					System.out.print(" "+change+"の予定は?  1.授業: 2.休み >");
+					System.out.println();
 
 					int cPlan=sc.nextInt();
 					System.out.print(" メモを入力→ ");sc.nextLine();
@@ -107,7 +109,8 @@ class Day{
 	public static void selectPrint(Day[] week,int selectNum){
 			switch(selectNum){
 				case 0:
-					System.out.println("今週の予定一覧");
+					System.out.println("____今週の予定一覧___");
+					System.out.println();
 					for(Day n:week){
 						if(n.plan==1){
 						showPlan(n.day,"授業",n.memo);
@@ -119,7 +122,8 @@ class Day{
 					}
 					break;
 				case 1:
-					System.out.println("授業の日一覧");
+					System.out.println("___授業の日一覧___");
+					System.out.println();
 					for(Day n:week){
 						if(n.plan==1){
 						showPlan(n.day,"授業",n.memo);
@@ -127,7 +131,8 @@ class Day{
 					}
 					break;
 				case 2:
-					System.out.println("休みの日一覧");
+					System.out.println("___休みの日一覧___");
+					System.out.println();
 					for(Day n:week){
 						if(n.plan==2){
 						showPlan(n.day,"休み",n.memo);
@@ -135,7 +140,8 @@ class Day{
 					}
 					break;
 				case 3:
-					System.out.println("未定の日一覧");
+					System.out.println("___未定の日一覧___");
+					System.out.println();
 					for(Day n:week){
 						if(n.plan!=1 && n.plan!=2){
 						showPlan(n.day,"未定",n.memo);
@@ -146,7 +152,7 @@ class Day{
 	}
 	public static void showPlan(String n,String s,String m){
 		System.out.printf("%sの予定は%s",n,s);
-		System.out.println("	メモ: "+m);
+		System.out.println("	〇メモ "+m);
 		System.out.println();
 	}
 }
