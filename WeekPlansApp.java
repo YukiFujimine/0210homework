@@ -77,7 +77,6 @@ public class WeekPlansApp{
 					return week;
 				}
 					System.out.print(" "+change+"の予定は?  1.授業: 2.休み >");
-					System.out.println();
 
 					int cPlan=sc.nextInt();
 					System.out.print(" メモを入力→ ");sc.nextLine();
